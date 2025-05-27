@@ -1,0 +1,36 @@
+# Import necessary libraries
+import numpy  # For numerical operations and polynomial fitting
+import matplotlib.pyplot as plt  # For plotting graphs and visualizations
+from sklearn.metrics import r2_score  # For evaluating the goodness of fit (r-squared)
+
+# Define the data arrays:
+# x represents the hours of the day when cars passed the tollbooth (independent variable)
+x = [1,2,3,5,6,7,8,9,10,12,13,14,15,16,18,19,21,22]
+
+# y represents the speed of the cars at those times (dependent variable)
+y = [100,90,80,60,60,55,60,65,70,70,75,76,78,79,90,99,99,100]
+
+# Create a polynomial model of degree 3 that fits the data points (polynomial regression)
+# numpy.polyfit returns the coefficients of the polynomial that fits the data
+# numpy.poly1d creates a polynomial function from these coefficients
+mymodel = numpy.poly1d(numpy.polyfit(x, y, 3))
+
+# Generate 100 evenly spaced values between 1 and 22 to plot a smooth polynomial curve
+myline = numpy.linspace(1, 22, 100)
+
+# Plot the original data points as a scatter plot
+plt.scatter(x, y)
+
+# Plot the polynomial regression line using the generated points and the polynomial model
+plt.plot(myline, mymodel(myline))
+
+# Display the plot
+plt.show()
+
+# Evaluate how well the polynomial model fits the data using the r-squared metric
+# r-squared ranges from 0 to 1, where values closer to 1 indicate a better fit
+print("R-squared:", r2_score(y, mymodel(x)))
+
+# Predict the speed of a car passing at hour 17 using the polynomial model
+predicted_speed = mymodel(17)
+print("Predicted speed at hour 17:", predicted_speed)
