@@ -1,0 +1,19 @@
+# Import the numpy library for numerical operations, especially for generating random numbers
+import numpy
+
+# Import matplotlib.pyplot for plotting graphs and histograms
+import matplotlib.pyplot as plt
+
+# Generate an array 'x' of 100,000 random numbers drawn from a normal distribution
+# Parameters:
+# 5.0   -> mean (loc): the center of the distribution where values are concentrated
+# 1.0   -> standard deviation (scale): controls the spread of the distribution around the mean
+# 100000 -> size: number of random samples to generate
+x = numpy.random.normal(5.0, 1.0, 100000)
+
+# Create a histogram of the data in 'x'
+# 100 bins are used to group the data values into intervals for visualization
+plt.hist(x, 100)
+
+# Display the histogram plot
+plt.show()
