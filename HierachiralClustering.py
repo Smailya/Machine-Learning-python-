@@ -1,4 +1,9 @@
 # Import necessary libraries
+"""
+Hierarchical clustering helps discover natural groupings in data by building a tree of clusters without predefined labels. The dendrogram provides insight into the clustering process and helps decide the number of clusters. Agglomerative clustering is intuitive and widely used in fields like bioinformatics, marketing, and exploratory data analysis for understanding relationships between data points.
+
+This example demonstrates both the linkage/dendrogram approach (SciPy) and the direct clustering approach (scikit-learn) with visualization to interpret the results clearly.
+"""
 import numpy as np  # For numerical operations and array handling
 import matplotlib.pyplot as plt  # For plotting data and dendrogram
 from scipy.cluster.hierarchy import dendrogram, linkage  # For hierarchical clustering and dendrogram plotting
