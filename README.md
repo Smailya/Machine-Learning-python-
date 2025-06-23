@@ -51,3 +51,43 @@ Decision trees can sometimes overfit the training data if too deep.
 Predictions are probabilistic and can vary slightly if the tree is re-trained.
 
 Decision trees are intuitive and easy to visualize, making them useful for explaining decisions.
+
+Hierarchical Clustering :
+
+numpy: Used for numerical operations and managing arrays.
+
+matplotlib: For plotting scatter plots and dendrograms.
+
+scipy.cluster.hierarchy: Provides linkage to perform hierarchical clustering and dendrogram to visualize the cluster hierarchy.
+
+scikit-learn: Provides AgglomerativeClustering for an easy-to-use hierarchical clustering implementation.
+
+Install missing packages via: pip install numpy matplotlib scipy scikit-learn
+
+What is Hierarchical Clustering?
+Hierarchical clustering is an unsupervised learning technique used to group similar data points into clusters without needing labeled data or a target variable.
+
+It builds a hierarchy (tree) of clusters, represented visually as a dendrogram.
+
+The most common approach is Agglomerative Clustering (bottom-up):
+
+Start with each data point as its own cluster.
+
+Iteratively merge the two closest clusters based on a distance metric (e.g., Euclidean distance).
+
+Continue merging until all points form a single cluster or until a desired number of clusters is reached.
+
+The Ward linkage method is used here, which merges clusters to minimize the variance within clusters, producing compact clusters.
+
+How the Code Works
+Data Preparation: Creates a small dataset of 10 points in 2D space.
+
+Visualization: Plots the raw data points to understand their distribution.
+
+Linkage Calculation: Uses SciPy’s linkage function to compute hierarchical clustering based on Ward linkage and Euclidean distance.
+
+Dendrogram Plot: Visualizes the clustering hierarchy, showing how clusters merge at different distances.
+
+Clustering with scikit-learn: Uses AgglomerativeClustering to assign each data point to one of two clusters.
+
+Cluster Visualization: Colors points by their cluster assignment to show the grouping.
