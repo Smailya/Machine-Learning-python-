@@ -1,5 +1,3 @@
-# Logistic Regression Example with Comments and Explanation
-
 # Import dependencies
 import numpy as np  # For numerical operations and array handling
 from sklearn import linear_model  # For logistic regression model
