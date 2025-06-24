@@ -1,4 +1,40 @@
-# Import dependencies
+"""
+What is Logistic Regression?
+Logistic Regression is a classification algorithm used to predict categorical outcomes (e.g., yes/no, 0/1).
+
+Unlike linear regression, which predicts continuous values, logistic regression predicts the probability that a given input belongs to a particular class.
+
+For binary classification (two possible outcomes), logistic regression models the log-odds of the outcome as a linear function of the input variables.
+
+The output probability is between 0 and 1, indicating the likelihood of the positive class (e.g., tumor is cancerous).
+
+How the Code Works:
+Data Preparation:
+Tumor sizes (X) and their corresponding cancer status (y) are prepared. X is reshaped to a 2D array as required by scikit-learn.
+
+Model Training:
+A logistic regression model is created and trained (fit) on the data to learn the relationship between tumor size and cancer status.
+
+Prediction:
+The model predicts whether a tumor of size 3.46 cm is cancerous or not.
+
+Interpreting Coefficients:
+The model coefficient represents the change in log-odds per unit increase in tumor size. Exponentiating it gives the odds ratio, which is easier to interpret (e.g., odds increase 4 times per cm increase).
+
+Probability Calculation:
+The logit2prob function converts the model’s log-odds output into probabilities between 0 and 1, showing the likelihood of cancer for each tumor size.
+
+ Results: A tumor size of 3.46 cm is predicted not to be cancerous (``).
+
+The odds ratio (~4) means each 1 cm increase in tumor size multiplies the odds of cancer by about 4.
+
+Probabilities for each tumor size give a nuanced understanding of cancer risk rather than a simple yes/no prediction.
+
+This example demonstrates how logistic regression can be used to classify binary outcomes and interpret the results probabilistically.
+"""
+
+# Import dependencies pip install numpy scikit-learn
+
 import numpy as np  # For numerical operations and array handling
 from sklearn import linear_model  # For logistic regression model
 
