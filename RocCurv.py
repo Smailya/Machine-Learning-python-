@@ -1,4 +1,28 @@
-# Import necessary libraries
+
+"""
+This code demonstrates evaluation of classification models on an imbalanced dataset, where one class (class 1) dominates 95% of the data.
+
+Problem with Accuracy:
+Accuracy can be misleading on imbalanced data. A model that always predicts the majority class achieves high accuracy but is useless for detecting the minority class.
+
+Alternative Metric - AUC-ROC:
+The ROC curve plots the True Positive Rate (sensitivity) vs False Positive Rate (1 - specificity) across thresholds. The AUC (Area Under Curve) quantifies the model’s ability to discriminate between classes regardless of threshold.
+
+Two Hypothetical Models:
+
+Model 1 predicts all samples as majority class → high accuracy but poor class 0 detection.
+
+Model 2 predicts probabilities with some overlap → lower accuracy but better balanced performance.
+
+Plotting ROC Curve:
+Visualizes model performance at different thresholds, showing the trade-off between sensitivity and specificity.
+
+AUC Score:
+Provides a threshold-independent measure of model quality, especially useful for imbalanced datasets.
+"""
+
+# Import necessary libraries  pip install numpy scikit-learn matplotlib
+
 import numpy as np  # For numerical operations and array handling
 from sklearn.metrics import accuracy_score, confusion_matrix, roc_auc_score, roc_curve  # Evaluation metrics
 import matplotlib.pyplot as plt  # For plotting ROC curve
