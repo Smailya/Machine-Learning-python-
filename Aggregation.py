@@ -1,6 +1,7 @@
 # Required dependencies:
 # - scikit-learn: for machine learning tools and datasets
 # - To install, run: pip install scikit-learn
+# - then write the code
 
 from sklearn import datasets  # Import datasets module to load sample datasets
 from sklearn.model_selection import train_test_split  # Import function to split data into training and testing sets
