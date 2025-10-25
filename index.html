@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars safety | Cixvora</title>
+    <link href="assets/img/favicon.png" rel="icon">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+
+        body {
+            background-color: #f9fafb;
+            color: #1f2937;
+            line-height: 1.5;
+        }
+
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* Common styles */
+        .section {
+            padding: 4rem 1rem;
+        }
+
+
+        @media (min-width: 768px) {
+            .section {
+                padding: 4rem 3rem;
+            }
+        }
+
+
+        @media (min-width: 1024px) {
+            .section {
+                padding: 4rem 6rem;
+            }
+        }
+
+
+        .btn {
+              background-color: #06b6d4;
+             color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: opacity 0.2s;
+        }
+
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+
+        .logo-placeholder {
+            /* This style is now less relevant since we use an <img> directly, */
+            /* but we keep it to maintain existing layout structure (like margin-bottom). */
+            width: 12rem;
+            height: 3rem;
+            /* background-color: #e5e7eb; - removed to show logo */
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Aligned to left for logo */
+            border-radius: 0.25rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+        
+        /* Add style for the actual logo image */
+        .logo-placeholder img {
+            max-width: 500%;
+            max-height: 500%;
+            object-fit: contain;
+        }
+
+
+        /* Hero section */
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+
+        @media (min-width: 1024px) {
+            .hero-content {
+                flex-direction: row;
+            }
+        }
+
+
+        .hero-text {
+            width: 100%;
+        }
+
+
+        @media (min-width: 1024px) {
+
+
+            .hero-text,
+            .hero-video {
+                width: 50%;
+            }
+        }
+
+
+        .hero-title {
+            font-size: 2.25rem;
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+
+        @media (min-width: 1024px) {
+            .hero-title {
+                font-size: 3.75rem;
+            }
+        }
+
+
+        .hero-title span {
+            color: #06b6d4;
+        }
+
+
+        .hero-description {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+
+        .stat-number {
+            font-size: 1.875rem;
+            font-weight: 700;
+        }
+
+
+        .stat-label {
+            color: #6b7280;
+        }
+
+
+        .video-placeholder {
+            position: relative;
+            width: 100%;
+            background-color: #1f2937;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            aspect-ratio: 16 / 9;
+        }
+
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4rem;
+            height: 4rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            z-index: 10; /* Ensure button is above the video */
+        }
+        
+        /* NEW: Style for when the video is playing (hides the play button) */
+        .video-playing .play-button {
+            display: none;
+        }
+        
+        /* NEW: Style to ensure video without controls behaves like the hero video when stopped */
+        .video-placeholder video {
+            width: 100%; 
+            height: auto; 
+            /* Hide the built-in controls on the middle video initially */
+            pointer-events: none; 
+        }
+        /* Show controls when playing or if the user starts it */
+        .video-placeholder.video-playing video {
+            pointer-events: auto;
+        }
+
+
+        .play-icon {
+            width: 2rem;
+            height: 2rem;
+            color: white;
+        }
+
+
+        /* Middle section */
+        .middle-section-title {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+
+        @media (min-width: 768px) {
+            .middle-section-title {
+                font-size: 2.25rem;
+            }
+        }
+
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+
+        @media (min-width: 1024px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+
+        .content-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+
+        .content-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(4px);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .card-date {
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+
+        .card-description {
+            margin-bottom: 1rem;
+        }
+
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: #06b6d4;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+
+        /* Footer section */
+        .footer {
+            width: 100%;
+            padding: 4rem 1rem;
+            margin-top: auto;
+        }
+
+
+        @media (min-width: 768px) {
+            .footer {
+                padding: 4rem 3rem;
+            }
+        }
+
+
+        @media (min-width: 1024px) {
+            .footer {
+                padding: 4rem 6rem;
+            }
+        }
+
+
+        .footer-cta {
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+
+        .footer-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+
+        @media (min-width: 768px) {
+            .footer-title {
+                font-size: 3rem;
+            }
+        }
+
+
+        .footer-title span {
+            color: #06b6d4;
+        }
+
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 3rem;
+        }
+
+
+        @media (min-width: 768px) {
+            .footer-content {
+                flex-direction: row;
+            }
+        }
+
+
+        .footer-info {
+            margin-bottom: 2rem;
+        }
+
+
+        @media (min-width: 768px) {
+            .footer-info {
+                margin-bottom: 0;
+            }
+        }
+
+
+        .address-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #6b7280;
+        }
+
+
+        .address {
+            color: #6b7280;
+        }
+
+
+        .phone {
+            color: #6b7280;
+            margin-top: 1rem;
+        }
+
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #e5e7eb;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #1f2937;
+        }
+
+
+        .policy-links {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+
+        .policy-link {
+            color: #6b7280;
+            text-decoration: none;
+        }
+
+
+        .policy-link:hover {
+            color: #1f2937;
+        }
+
+
+        /* SVG icons */
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    </style>
+</head>
+
+
+<body> 
+   
+    <div class="container"> 
+        <section class="section">
+            <div class="logo-placeholder">
+                <img src="assets/img/blackremovebg.png" alt="Cixvora Logo">
+            </div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title"> Where AI Meets <span> Automotive Security </span> </h1>
+                    <p class="hero-description"> At Cixvora, we’re redefining the future of driving with AI-powered solutions that
+                         protect you from external threats, ensuring every journey is not just safe, but effortlessly secure. </p> 
+                </div>
+               <div class="hero-video">
+  <div class="video-placeholder" style="width: 100%; background-color: #1f2937; border-radius: 0.5rem; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); aspect-ratio: 16 / 9;">
+    <img src="assets/img/caranalyse.png" alt="Car Analyse" style="width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0.5rem;" />
+  </div>
+</div>
+
+            </div>
+        </section> 
+        <section class="section">
+            <h2 class="middle-section-title"> Driven by Innovation. Explore our latest AI breakthroughs. </h2>
+            <div class="content-grid">
+                <div class="video-placeholder" id="middle-video-placeholder"> 
+                    <video id="middle-video" preload="metadata" playsinline muted poster="assets/img/CixvoraAD1-poster.jpg" loading="lazy">
+                        <source src="assets/img/CixvoraAD1.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    <button class="play-button" id="middle-play-button"> 
+                        <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg> 
+                    </button>
+                </div>
+
+                <div class="content-cards">
+                    <div class="content-card">
+                        <h3 class="card-title">Our First Patent Prototype AYN1</h3>
+                        <p class="card-description"><ul>
+                        
+                                       <li><i class="bi bi-check-circle"></i> <span>Real time data analysis</span>
+                            </li>
+                        
+                                   <li><i class="bi bi-check-circle"></i> <span>Notification of real time
+                                    threat</span></li>
+                        
+                                         <li><i class="bi bi-check-circle"></i> <span>Contengency measures in place for
+                                    your protection</span></li>
+                        
+                        </ul>
+                        </p>  </div>
+                    <div class="content-card">
+                        <h3 class="card-title">Second prototype AYN2</h3>
+                        <p class="card-description">Still cooking coming soon.</p> </div>
+                </div>
+            </div>
+        </section> 
+       <footer class="footer">
+   <footer class="footer">
+    <div class="footer-cta">
+        <h2 class="footer-title">
+            Join Us In This Journey
+            <span style="display: block; margin-top: 0.5rem;">Be a Pioneer in AI Automotive Security</span>
+        </h2>
+        <a href="mailto:ismailcisse@cixvora.com?subject=I'm%20interested%20in%20investing%20in%20cixvora" style="text-decoration: none;">
+            <button class="btn">
+                Invest in Cixvora Today.
+                <svg class="icon" style="margin-left: 0.5rem;"
+                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </button>
+        </a>
+    </div>
+</footer>
+
+
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="logo-placeholder">
+                        <img src="assets/img/blackremovebg.png" alt="Cixvora Logo">
+                    </div>
+                    <div class="address">
+                        <p class="address-title">Location</p>
+                        <p>110 8th St, Orange Grove,</p>
+                        <p> Johannesburg, 2192, SA</p>
+                        <p class="phone">Phone: +27 617571350</p>
+                    </div>
+                </div>
+        
+                <div class="footer-links" style="display:flex; justify-content: flex-end;">
+                    <a href="https://www.linkedin.com/company/cixvora" class="social-link" style="margin-top: 11px;">
+                        <svg class="icon" xmlns="http://www.w3.org/2000/svg" fill="#06b6d4" viewBox="0 0 24 24" stroke="#06b6d4"
+                            width="24" height="24">
+                            <path
+                                d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.27c-.96 0-1.75-.79-1.75-1.75s.79-1.75 1.75-1.75 1.75.79 1.75 1.75-.79 1.75-1.75 1.75zm13.5 12.27h-3v-5.5c0-1.38-1.12-2.5-2.5-2.5s-2.5 1.12-2.5 2.5v5.5h-3v-11h3v1.5c.76-1.07 2-1.5 3-1.5 2.21 0 4 1.79 4 4v7.5z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        
+            <div style="text-align: center; padding: 1rem 0; font-size: 0.9rem; color: #6b7280;">
+                Cixvora all rights reserved
+            </div>
+        </footer>
+
+            </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get the button from the middle section
+            const playButton = document.getElementById('middle-play-button');
+            // Get the video element from the middle section
+            const videoElement = document.getElementById('middle-video');
+            // Get the video container/placeholder
+            const videoPlaceholder = document.getElementById('middle-video-placeholder');
+            
+            // NOTE: The video in the hero section also has a button (id="hero-play-button").
+            // To make the hero button also control the middle video, we can add it here.
+            const heroPlayButton = document.getElementById('hero-play-button');
+
+            const toggleVideoPlay = () => {
+                // Check if video is paused (or ended)
+                if (videoElement.paused || videoElement.ended) {
+                    videoElement.play();
+                    videoElement.controls = true; // Show video controls
+                    videoElement.muted = false; // Unmute the video on play
+                    videoPlaceholder.classList.add('video-playing'); // Hide the overlay button
+                } else {
+                    videoElement.pause();
+                    videoElement.controls = false; // Hide video controls
+                    videoElement.muted = true; // Mute it when paused (optional)
+                    videoPlaceholder.classList.remove('video-playing'); // Show the overlay button
+                }
+            };
+
+            // 1. Add functionality to the middle section button
+            if (playButton) {
+                playButton.addEventListener('click', toggleVideoPlay);
+            }
+            
+            // 2. Add functionality to the hero section button (to start the middle video)
+            if (heroPlayButton) {
+                heroPlayButton.addEventListener('click', () => {
+                     // Scroll to the middle video section first
+                    const middleSection = document.querySelector('.middle-section-title');
+                    if (middleSection) {
+                        middleSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    
+                    // Then play the video
+                    // A small delay might be helpful after a scroll but we'll try without first
+                    if (videoElement.paused || videoElement.ended) {
+                         toggleVideoPlay();
+                    }
+                });
+            }
+
+            // 3. Optional: If the video stops/ends, bring the play button back
+            videoElement.addEventListener('pause', () => {
+                videoElement.controls = false;
+                videoPlaceholder.classList.remove('video-playing');
+            });
+
+            videoElement.addEventListener('ended', () => {
+                videoElement.controls = false;
+                videoPlaceholder.classList.remove('video-playing');
+            });
+            
+            // 4. Optional: If the user clicks the video itself while it's playing, pause it and restore the button overlay
+            videoElement.addEventListener('click', () => {
+                if (!videoElement.paused && !videoElement.ended) {
+                     videoElement.pause();
+                }
+            });
+        });
+    </script>
+</body>
+
+
+</html>

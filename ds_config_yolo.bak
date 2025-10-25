@@ -1,0 +1,32 @@
+[property]
+# DeepStream 7.1 compatible YOLOv11 primary inference config
+gpu-id=0
+net-scale-factor=0.00392156979
+model-engine-file=/home/ismail/Documents/T/venv/tracking/yolo11n.engine
+network-mode=1
+labelfile-path=/home/ismail/Documents/T/venv/tracking/labels.txt
+model-color-format=0
+infer-dims=3;640;640
+batch-size=1
+process-mode=1             # Primary mode
+num-detected-classes=80
+gie-unique-id=1
+# CRITICAL FIX: Missing custom parser function name
+parse-bbox-func-name=NvDsInferParseCustomYoloV5
+# output tensor name – adapt only if your engine uses a different name (case-sensitive)
+output-blob-names=output
+cluster-mode=2
+interval=0
+
+[class-attrs-all]
+pre-cluster-threshold=0.25
+topk=20
+
+[custom-lib]
+enable=1
+custom-lib-path=/home/ismail/Documents/T/venv/tracking/libnvdsinfer_custom_impl_Yolo.so
+# NOTE: The custom-lib-path key is redundant here if defined in [property], 
+# but defining it in [custom-lib] is also supported in newer versions.
+
+[custom-input-output-dims]
+model-dims=3;640;640

@@ -1,0 +1,17 @@
+[property]
+# DeepStream 7.1 SGIE (Brand Classification)
+gpu-id=0
+net-scale-factor=0.00392156979
+model-engine-file=/home/ismail/Documents/T/venv/tracking/brandbest.engine
+network-mode=1
+labelfile-path=/home/ismail/Documents/T/venv/tracking/brand_labels.txt
+model-color-format=0
+infer-dims=3;224;224
+batch-size=16
+process-mode=2           # Secondary mode
+gie-unique-id=2
+operate-on-class-ids=2   # Run on vehicle class (YOLO class ID 2)
+cluster-mode=0
+interval=0
+threshold=0.8
+output-blob-names=predictions/Softmax

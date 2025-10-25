@@ -1,0 +1,41 @@
+# Tracker Configuration for NvDCF
+Tracker:
+  # Enable this NvDCF tracker section
+  Enable: 1
+  
+  # --- Common Tracker Parameters ---
+  # Type of tracker. 1=NvDCF, 2=NvSORT, 3=IOU
+  TrackerType: 1 
+  
+  # Tracking width/height must match the tracker properties set in the Python code
+  TrackerWidth: 640
+  TrackerHeight: 480
+  
+  # Time in frames after which an untracked object is removed
+  PastFrame: 10 
+  
+  # Maximum number of objects that can be tracked simultaneously
+  MaxTargetsPerStream: 50 
+  
+  # --- NvDCF Specific Parameters (Critical for performance and accuracy) ---
+  # Path to the Low-Level library (NvDCF)
+  LlLibFile: /opt/nvidia/deepstream/deepstream/lib/libnvds_nvdcf.so 
+  
+  # Configure the Low-Level Tracker parameters 
+  LlConfig:
+    # --- LlConfig for NvDCF ---
+    # Max allowed tracking distance
+    max_bounding_box_distance: 0.2
+    
+    # Matching strategy: 1=IoU, 2=DeepSort, 3=Hybrid (DeepSort with optional IoU)
+    # Using 1 for simplicity, as we rely on the tracker to maintain IDs.
+    matching_strategy: 1 
+    
+    # Initial confidence required for a track to be confirmed
+    initial_confidence: 0.8
+    
+    # Maximum number of frames for which a track can be lost and still recovered
+    max_trace_frames: 70 
+    
+    # Optional. Can improve performance if enabled.
+    enable_past_frame_reporting: 1

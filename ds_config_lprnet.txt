@@ -1,0 +1,19 @@
+[property]
+# DeepStream 7.1 SGIE (LPRNet)
+gpu-id=0
+net-scale-factor=0.00392156979
+model-engine-file=/home/ismail/Documents/T/venv/tracking/Final_LPRNet_model_int8.engine
+network-mode=1
+labelfile-path=/home/ismail/Documents/T/venv/tracking/lpr_labels.txt
+model-color-format=0
+infer-dims=3;48;192
+batch-size=16
+process-mode=2
+gie-unique-id=3
+# If you have a custom LPR parser .so built, point it here (optional)
+# custom-lib-path=/home/ismmail/Documents/T/venv/tracking/libnvds_nvinfer_lprnet.so
+output-blob-names=logits
+operate-on-class-ids=2
+cluster-mode=0
+interval=0
+threshold=0.5
